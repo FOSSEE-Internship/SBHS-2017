@@ -1,0 +1,11 @@
+*.pyc
+pi_server/*/*.pyc
+pi_server/credentials.py
+log/
+static/img/webcam/
+experiments/
+sbhs.sqlite3
+pi_server/tables/migrations
+new.csv
+date.txt
+map_machine_ids.txt
