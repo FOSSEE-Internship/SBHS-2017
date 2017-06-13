@@ -57,6 +57,22 @@ echo "Installing dependencies for MySQL..."
 sudo apt-get install -y libmysqlclient-dev python-dev >> setup_pi.log
 echo "Done."
 
+# Configuring apache
+echo "Configuring apache dependencies and permissions..."
+sudo apt-get install -y libapache2-mod-wsgi >> setup_pi.log
+sudo chown -R pi:www-data ../sbhs-pi
+sudo chmod g+w log/django_error.log
+
+# Enabling new site
+echo "Generating conf files for apache..."
+sudo cp apache.conf /etc/apache2/sites-available/pi.conf
+sudo a2ensite pi.conf >> setup_pi.log
+sudo service apache2 reload
+sudo a2dissite 000-default.conf >> setup_pi.log
+sudo service apache2 restart
+sudo service apache2 reload
+echo "Done."
+
 # Install requirements through pip
 echo "Installing requirements through pip..."
 pip install -r requirements.txt >> setup_pi.log
