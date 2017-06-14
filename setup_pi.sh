@@ -4,6 +4,8 @@ cd /home/pi
 
 echo "Initializing Raspberry Pi setup..."
 sudo apt-get update > setup_pi.log
+sudo unlink /etc/localtime
+sudo ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 
 # Install git
 echo "Installing git..."
