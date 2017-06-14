@@ -9,3 +9,4 @@ pi_server/tables/migrations
 new.csv
 date.txt
 map_machine_ids.txt
+shared/

@@ -30,8 +30,8 @@ source venv/bin/activate
 echo "Done."
 
 cd sbhs-pi/
-mkdir -p log
-touch log/django_error.log report.json
+mkdir -p log shared
+touch log/django_error.log shared/report.json
 cp pi_server/credentials.py.example pi_server/credentials.py
 
 # Database credentials

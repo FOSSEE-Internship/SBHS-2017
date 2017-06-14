@@ -19,3 +19,5 @@ python manage.py log_generator
 #python log_generator.py
 date > date.txt
 sleep 2
+
+cp map_machine_ids.txt shared/
