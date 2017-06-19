@@ -93,7 +93,7 @@ def initiation(req):
 def experiment(req):
     try:
         server_start_ts = int(time.time() * 1000)
-        from sbhs_server.settings import boards
+        from pi_server.settings import boards
         user = req.user
         key = str(user.board.mid)
         experiment = Experiment.objects.select_related().filter(id=boards[key]["experiment_id"])
@@ -150,7 +150,7 @@ def experiment(req):
 @csrf_exempt
 def reset(req):
     try:
-        from sbhs_server.settings import boards
+        from pi_server.settings import boards
         user = req.user
         if user.is_authenticated():
             key = str(user.board.mid)
