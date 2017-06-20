@@ -3,13 +3,13 @@
 cd /home/pi
 
 echo "Initializing Raspberry Pi setup..."
-sudo apt-get update > setup_pi.log
+#sudo apt-get update > setup_pi.log
 sudo unlink /etc/localtime
 sudo ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 
 # Install git
 echo "Installing git..."
-sudo apt-get install -y git >> setup_pi.log
+sudo apt-get install -y git
 echo "Done."
 
 # Clone the repository from Github
@@ -18,12 +18,12 @@ git clone https://github.com/coderick14/sbhs-pi.git
 
 # Install virtualenv
 echo "Installing virtualenv..."
-sudo apt-get install -y virtualenv >> setup_pi.log
+sudo apt-get install -y virtualenv
 echo "Done."
 
 # Create virtualenv
 echo "Creating virtualenv..."
-virtualenv venv >> setup_pi.log
+virtualenv venv
 echo "Done."
 
 # Activate virtualenv
@@ -56,31 +56,32 @@ echo "Done."
 
 # Install dependencies for MySQL
 echo "Installing dependencies for MySQL..."
-sudo apt-get install -y libmysqlclient-dev python-dev >> setup_pi.log
+sudo apt-get install -y libmysqlclient-dev python-dev
 echo "Done."
 
 # Configuring apache
 echo "Configuring apache dependencies and permissions..."
-sudo apt-get install -y libapache2-mod-wsgi >> setup_pi.log
+sudo apt-get install -y libapache2-mod-wsgi
 sudo chown -R pi:www-data ../sbhs-pi
 sudo chmod g+w log/django_error.log
 
 # Enabling new site
 echo "Generating conf files for apache..."
 sudo cp apache.conf /etc/apache2/sites-available/pi.conf
-sudo a2ensite pi.conf >> setup_pi.log
+sudo a2ensite pi.conf
 sudo service apache2 reload
-sudo a2dissite 000-default.conf >> setup_pi.log
+sudo a2dissite 000-default.conf
 sudo service apache2 restart
 sudo service apache2 reload
 echo "Done."
 
 # Install requirements through pip
 echo "Installing requirements through pip..."
-pip install -r requirements.txt >> setup_pi.log
+pip install -r requirements.txt
 echo "Done."
 
 # Run cron script
 echo "Scanning and initializing machines..."
-bash cron_job.sh >> setup_pi.log
+bash cron_job.sh
 echo "Done."
+
