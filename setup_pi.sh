@@ -32,7 +32,7 @@ source venv/bin/activate
 echo "Done."
 
 cd sbhs-pi/
-mkdir -p log shared
+mkdir -p log shared experiments
 touch log/django_error.log shared/report.json
 cp pi_server/credentials.py.example pi_server/credentials.py
 
@@ -63,7 +63,8 @@ echo "Done."
 echo "Configuring apache dependencies and permissions..."
 sudo apt-get install -y libapache2-mod-wsgi
 sudo chown -R pi:www-data ../sbhs-pi
-sudo chmod g+w log/django_error.log
+sudo chmod -R g+w log
+sudo chmod -R g+w experiments
 
 # Enabling new site
 echo "Generating conf files for apache..."
