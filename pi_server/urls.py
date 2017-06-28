@@ -19,4 +19,5 @@ from django.conf.urls import include, url
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     url(r'^', include('experiment.urls')),
+    url(r'^', include('admin_ops.urls')),
 ]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'experiment',
+    'admin_ops',
     'pi_server.tables',
 ]
 
