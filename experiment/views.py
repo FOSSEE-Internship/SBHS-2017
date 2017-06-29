@@ -54,16 +54,12 @@ def initiation(req):
 
                         e = Experiment()
                         e.booking=cur_booking
-                        e.log=os.path.join(logdir, filename)
+                        e.log=user.username + "/" + filename
                         e.save()
 
                         key = str(user_board.mid)
 			
                         settings.boards[key]["experiment_id"] = e.id
-                        # global_logfile = settings.SBHS_GLOBAL_LOG_DIR + "/" + key + ".log"
-                        # with open(global_logfile, "a") as global_loghandler:
-                        #     data = "\n\n===================New experiment====================\nUsername : " + user.username + "\nExperiment Id : " + str(e.id) + "\n"
-                        #     global_loghandler.write(data)
                             
                         reset(req)
 
@@ -87,8 +83,8 @@ def initiation(req):
         MESSAGE = "Invalid username or password"
 
     return HttpResponse(json.dumps({"STATUS": STATUS, "MESSAGE": MESSAGE}))
-#    return HttpResponse(key)
-# @login_required(redirect_field_name=None)
+
+@login_required(redirect_field_name=None)
 @csrf_exempt
 def experiment(req):
     try:
@@ -125,7 +121,7 @@ def experiment(req):
                                             server_end_ts,
                                             req.POST.get("variables"), timeleft)
 
-                f = open(experiment.log, "a")
+                f = open(os.path.join(settings.EXPERIMENT_LOGS_DIR, experiment.log), "a")
                 f.write(" ".join(MESSAGE.split(",")[:2]) + "\n")
                 f.close()
             else:
@@ -174,29 +170,6 @@ def reset(req):
 
 def client_version(req):
     return HttpResponse("3")
-
-@login_required(redirect_field_name=None)
-def logs(req):
-    bookings         = Booking.objects.only("id").filter(account__id=req.user.id)
-    deleted_bookings = Booking.trash.only("id").filter(account__id=req.user.id)
-    bookings = list(bookings) + list(deleted_bookings)
-    booking_ids = [b.id for b in bookings]
-    experiments = Experiment.objects.select_related("booking", "booking__slot").filter(booking_id__in=booking_ids)
-    for e in experiments:
-        e.logname = e.log.split("/")[-1]
-    return render(req, "experiment/logs.html", {"experiments": reversed(experiments)})
-
-@login_required(redirect_field_name=None)
-def download_log(req, experiment_id, fn):
-    try:
-        experiment_data = Experiment.objects.select_related("booking", "booking__account").get(id=experiment_id)
-        assert req.user.id == experiment_data.booking.account.id
-        f = open(experiment_data.log, "r")
-        data = f.read()
-        f.close()
-        return HttpResponse(data, content_type='text/text')
-    except:
-        return HttpResponse("Requested log file doesn't exist.")
 
 def log_data(sbhs, mid, experiment_id, heat=None, fan=None, temp=None):
     if heat is None:

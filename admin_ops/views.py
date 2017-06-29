@@ -4,30 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from pi_server import sbhs, settings
 from pi_server.tables.models import Booking, Experiment, Slot
 import json, os, serial, datetime
-# Create your views here.
 
-    # try:
-    #     mid = int(req.POST.get('mid'))
-    # except Exception as e:
-    #     return HttpResponse(json.dumps({"status_code":500,"message":"Invalid Mid."+str(e)}))
-
-    # try:
-    #     conn = boards[mid]["board"]
-    # except Exception as e:
-    #     return HttpResponse(json.dumps({"status_code":500,"message":"No device with such MID."+str(e)}))
-    # try:
-    #     if not conn.is_open():
-    #         conn.open()
-    # except Exception as e:
-    #     return HttpResponse(json.dumps({"status_code":500,"message":"Could not connect to device."+str(e)}))
-    # 
-    # try:
-    #     if conn.reset_board():
-    #         return HttpResponse(json.dumps({"status_code":200,"message":"Reset Successful","temp":conn.getHeat()}))
-    #     else : 
-    #         return HttpResponse(json.dumps({"status_code":500,"message":"Couldn't reset the device")}))
-    # except Exception as e:
-    #     return HttpResponse(json.dumps({"status_code":500,"message":"Couldn't reset the board."+str(e)}))
 @csrf_exempt
 def reset_device(req):
     """Resets the device to fan = 100 and heat = 0
@@ -169,7 +146,7 @@ def monitor_experiment(req):
 
     try:
         # get last 10 lines from logs
-        stdin,stdout = os.popen2("tail -n 10 "+logfile)
+        stdin,stdout = os.popen2("tail -n 10 "+os.path.join(settings.EXPERIMENT_LOGS_DIR, logfile))
         stdin.close()
         logs = stdout.readlines(); stdout.close()
         screened_logs = []

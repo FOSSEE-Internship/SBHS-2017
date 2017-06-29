@@ -12,8 +12,6 @@ urlpatterns = [
     url(r'^experiment/initiate/?$', views.initiation, name='experiment_initiate'),
     url(r'^experiment/experiment/?$', views.experiment, name='experiment_experiment'),
     url(r'^experiment/reset/?$', views.reset, name='experiment_reset'),
-    url(r'^experiment/logs/?$', views.logs, name='experiment_logs'),
-    url(r'^experiment/logs/([0-9]+)/(.+)?$', views.download_log, name='experiment_logs'),
-
     url(r'^admin/validate_log_file/?$', views.validate_log_file, name='experiment_validate_log'),
 ]
+
