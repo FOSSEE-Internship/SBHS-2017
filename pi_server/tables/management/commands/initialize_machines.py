@@ -122,6 +122,5 @@ class Command(BaseCommand):
 		print "New offline board mids", new_offlines
 
 		Board.objects.filter(mid__in=current_onlines).update(online=True)
-		Board.objects.exclude(mid__in=current_onlines).update(online=False)
 
 		self.stdout.write('Boards loaded')
