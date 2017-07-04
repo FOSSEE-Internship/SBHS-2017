@@ -6,7 +6,7 @@
  Please follow the steps below to set up the server code on your system:
  
  + Clone this repository.  
- `git clone https://github.com/coderick14/sbhs.git`  
+ `git clone https://github.com/sbhs-iitb/sbhs.git`  
 If you have permission issues, make sure that you are added as a collaborator.
 Contact rupakrokade@gmail.com
 
