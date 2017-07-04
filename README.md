@@ -1,18 +1,18 @@
 # SBHS Server
-![SBHS logo](https://github.com/coderick14/sbhs/blob/deep/logo.png)  
+![SBHS logo](https://github.com/sbhs-iitb/sbhs/blob/master/logo.png)  
 
 [SBHS Virtual Labs Website](http://vlabs.iitb.ac.in/sbhs/)
  
- This [branch](https://github.com/coderick14/sbhs/tree/deep) contains the server code for the load sharing architecture. It consists of a master server, connected to several Raspberry Pis, each of which is connected to four SBHS devices.  
+ This [branch](https://github.com/sbhs-iitb/sbhs/tree/master) contains the server code for the load sharing architecture. It consists of a master server, connected to several Raspberry Pis, each of which is connected to four SBHS devices.  
 
  Please follow the steps below to set up the server code on your system:
  
  + Clone this repository.  
- `git clone https://github.com/coderick14/sbhs.git`  
+ `git clone https://github.com/sbhs-iitb/sbhs.git`  
 If you have permission issues, make sure that you are added as a collaborator.
 Contact rupakrokade@gmail.com
 
-+ Make sure you are on branch **deep**.  
++ Make sure you are on branch **master**.  
 Type `git branch` to check your current branch.  
 To switch to a specific branch, type `git checkout <branchname>`
 
